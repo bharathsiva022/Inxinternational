@@ -1,6 +1,7 @@
 import { defineConfig, devices } from '@playwright/test';
 import fs from 'fs';
 import path from 'path';
+import assert  from 'assert';
 
 /**
  * ------------------------------------------------------------------
@@ -18,9 +19,7 @@ const envPath = path.resolve(
   `${envName}.json`
 );
 
-if (!fs.existsSync(envPath)) {
-  throw new Error(`❌ Env file not found: ${envPath}`);
-}
+assert(fs.existsSync(envPath), `Env file not found: ${envPath}`);
 
 const envConfig = JSON.parse(fs.readFileSync(envPath, 'utf-8'));
 
